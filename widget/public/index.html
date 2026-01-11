@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SmartWeb AI Widget Test</title>
+
+    <style>
+        #smartweb-launcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background: #1e88e5;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999999;
+        }
+
+        #smartweb-box {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 330px;
+            height: 460px;
+            background: white;
+            border-radius: 12px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            z-index: 999998;
+        }
+
+        #smartweb-box.open {
+            display: flex;
+        }
+
+        #smartweb-header {
+            background: #1e88e5;
+            color: white;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #smartweb-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background: #f7f7f7;
+        }
+
+        #smartweb-input-area {
+            display: flex;
+            padding: 10px;
+            background: white;
+        }
+
+        #smartweb-input {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        #smartweb-send {
+            background: #1e88e5;
+            color: white;
+            padding: 8px 12px;
+            margin-left: 8px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .msg-user {
+            text-align: right;
+            margin: 6px 0;
+            padding: 6px 10px;
+            background: #d1eaff;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .msg-bot {
+            text-align: left;
+            margin: 6px 0;
+            padding: 6px 10px;
+            background: #fff;
+            border-radius: 8px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>SmartWeb AI Widget Test Page</h2>
+
+    <!-- load widget.js -->
+    <script src="./widget.js"></script>
+
+</body>
+
+</html>

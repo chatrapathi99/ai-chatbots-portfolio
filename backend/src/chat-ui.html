@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SmartWeb AI Chat Widget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+        }
+
+        #chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        #messages {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        #messages div {
+            margin-bottom: 8px;
+        }
+
+        #messages b {
+            margin-right: 5px;
+        }
+
+        #input-container {
+            display: flex;
+        }
+
+        #input {
+            flex: 1;
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        #send-btn {
+            margin-left: 5px;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4A90E2;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <div id="input-container">
+            <input id="input" type="text" placeholder="Type your message..." />
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById("input");
+        const messages = document.getElementById("messages");
+        const sendBtn = document.getElementById("send-btn");
+
+        const chatApiUrl = "http://localhost:3000/api/chat"; // backend API
+
+        async function sendMessage() {
+            const text = input.value.trim();
+            if (!text) return;
+
+            // show user message
+            messages.innerHTML += `<div><b>You:</b> ${text}</div>`;
+            input.value = "";
+            messages.scrollTop = messages.scrollHeight;
+
+            try {
+                const res = await fetch(chatApiUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await res.json();
+                // show bot message
+                messages.innerHTML += `<div><b>AI:</b> ${data.reply}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            } catch (err) {
+                messages.innerHTML += `<div style="color:red"><b>AI:</b> Failed to connect</div>`;
+                messages.scrollTop = messages.scrollHeight;
+                console.error(err);
+            }
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+
+</html>
