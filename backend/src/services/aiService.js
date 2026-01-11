@@ -6,14 +6,21 @@ const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-export async function askAI(message) {
-    const completion = await client.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-            { role: "system", content: "You are SmartWeb AI, a helpful website assistant." },
-            { role: "user", content: message }
-        ]
-    });
+export async function getAIResponse(userMessage) {
+    try {
+        const completion = await client.chat.completions.create({
+            model: "gpt-4o-mini", // or "gpt-4" if available
+            messages: [
+                { role: "system", content: "You are a helpful AI chatbot." },
+                { role: "user", content: userMessage }
+            ],
+            max_tokens: 150
+        });
 
-    return completion.choices[0].message.content;
+        // Return the AI's reply text
+        return completion.choices[0].message.content;
+    } catch (err) {
+        console.error("AI Error:", err);
+        return "Sorry, something went wrong!";
+    }
 }
