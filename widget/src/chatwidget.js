@@ -29,12 +29,7 @@ export default function ChatWidget() {
 
     return (
         <>
-            <button
-                onClick={() => setOpen(!open)}
-                className="fixed bottom-4 right-4 bg-blue-600 text-white rounded-full p-4 shadow-lg"
-            >
-                💬
-            </button>
+
 
             {open && (
                 <div className="fixed bottom-20 right-4 w-80 h-96 bg-white shadow-xl rounded-lg p-4">

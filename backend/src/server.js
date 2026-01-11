@@ -22,6 +22,14 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../../widget/build/index.html"));
 });
 
+// Serve chat UI
+app.get("/chat-ui", (req, res) => {
+    res.sendFile(path.join(__dirname, "chat-ui.html"));
+});
+app.get("/chat-ui/", (req, res) => {
+    res.sendFile(path.join(__dirname, "chat-ui.html"));
+});
+
 // AI chat API
 app.post("/api/chat", async (req, res) => {
     const userMessage = req.body.message;
