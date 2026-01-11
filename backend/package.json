@@ -1,7 +1,7 @@
 {
     "name": "smartweb-ai-backend",
     "version": "1.0.0",
-    "description": "Backend for SmartWeb AI website chatbot",
+    "description": "SmartWeb AI chatbot backend + frontend",
     "main": "src/server.js",
     "type": "module",
     "scripts": {
