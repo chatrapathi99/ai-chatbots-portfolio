@@ -21,7 +21,7 @@
     document.body.appendChild(chatButton);
 
     const iframe = document.createElement("iframe");
-    iframe.src = "https://ai-chatbots-portfolio-2.onrender.com//chat-ui";  // Correct
+    iframe.src = "https://ai-chatbots-portfolio-2.onrender.com/chat-ui";  // Correct
     iframe.id = "smartweb-chat-window";
     iframe.style.position = "fixed";
     iframe.style.bottom = "90px";
