@@ -1,5 +1,5 @@
 import express from "express";
-import { askAI } from "../services/aiService.js";
+import { getAIResponse } from "../services/aiService.js";
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
     try {
         const { message } = req.body;
 
-        const reply = await askAI(message);
+        const reply = await getAIResponse(message);
 
         res.json({ reply });
     } catch (err) {
