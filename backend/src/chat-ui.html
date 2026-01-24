@@ -74,7 +74,20 @@
         const sendBtn = document.getElementById("send-btn");
 
         const chatApiUrl = "https://ai-chatbots-portfolio-4.onrender.com/api/chat"; // backend API
-
+        function markdownToHtml(text) {
+            // Simple markdown to HTML converter
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // bold
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>') // h3
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>') // h2
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>') // h1
+                .replace(/^\* (.*$)/gim, '<li>$1</li>') // list items
+                .replace(/^\d+\. (.*$)/gim, '<li>$1</li>') // numbered list
+                .replace(/\n\n/g, '</p><p>') // paragraphs
+                .replace(/\n/g, '<br>') // line breaks
+                .replace(/<\/li><br><li>/g, '</li><li>') // fix lists
+                .replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>'); // wrap lists
+        }
         async function sendMessage() {
             const text = input.value.trim();
             if (!text) return;
@@ -92,7 +105,8 @@
                 });
                 const data = await res.json();
                 // show bot message
-                messages.innerHTML += `<div><b>AI:</b> ${data.reply}</div>`;
+                const formattedReply = markdownToHtml(data.reply);
+                messages.innerHTML += `<div><b>AI:</b> ${formattedReply}</div>`;               
                 messages.scrollTop = messages.scrollHeight;
             } catch (err) {
                 messages.innerHTML += `<div style="color:red"><b>AI:</b> Failed to connect</div>`;
